@@ -8,8 +8,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		treść zadania.jpg = treść zadania.jpg
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDModel", "BDModel", "{2CBD7B07-4025-47F2-A28C-679AC472BF9E}"
+	ProjectSection(SolutionItems) = preProject
+		20151128_180510.jpg = 20151128_180510.jpg
+		20151128_180517.jpg = 20151128_180517.jpg
+		20151128_180524.jpg = 20151128_180524.jpg
+		20151128_180529.jpg = 20151128_180529.jpg
+		20151128_180533.jpg = 20151128_180533.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CBD7B07-4025-47F2-A28C-679AC472BF9E} = {551F4A97-A990-49D7-8EFC-BB5B67B67301}
 	EndGlobalSection
 EndGlobal
