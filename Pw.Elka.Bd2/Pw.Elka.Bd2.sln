@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{551F4A97-A990-49D7-8EFC-BB5B67B67301}"
 	ProjectSection(SolutionItems) = preProject
+		Diagrams.vsdx = Diagrams.vsdx
+		notatki.txt = notatki.txt
 		treść zadania.jpg = treść zadania.jpg
 	EndProjectSection
 EndProject
