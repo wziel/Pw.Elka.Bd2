@@ -1,4 +1,4 @@
 ISBN and ISSN
-.“ISBN” is “International Standard Book Number” and “ISSN” is “International Standard Serial Number.”
+.“ISBN” is “International Standard Book Number” (13 digits) and “ISSN” is “International Standard Serial Number.” (8 digits)
 International Standard Book Number is given for monographs or books whereas International Standard Serial number is given to a series of monographs or books.
 In the case of the ISSN, it is only optional, which means that the publisher is not legally bound to use it. On the other hand, the ISBN is obligatory if the book falls under the ISBN application.
