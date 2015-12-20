@@ -4,6 +4,10 @@
     [nazwa]       VARCHAR (50)    NOT NULL,
     [rok]         SMALLINT        NOT NULL,
     [zdjecie]     VARBINARY (MAX) NOT NULL,
-    [dostepna_od] DATE            NULL
+    [dostepna_od] DATE            NULL,
+    [wypozyczona] BIT             NOT NULL,
+    CONSTRAINT [PK_Pozycja] PRIMARY KEY CLUSTERED ([id_pozycja] ASC)
 );
+
+
 
