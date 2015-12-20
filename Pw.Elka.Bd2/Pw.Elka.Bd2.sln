@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BDModel", "BDModel", "{2CBD
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Pw.Elka.Bd2.Database", "Pw.Elka.Bd2.Database\Pw.Elka.Bd2.Database.sqlproj", "{2ED41ED5-BFE0-4629-80B5-D725E5390AF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pw.Elka.Bd2.Tests", "Pw.Elka.Bd2.Tests\Pw.Elka.Bd2.Tests.csproj", "{61521FF5-4948-4F69-B3B9-755953BF329F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2ED41ED5-BFE0-4629-80B5-D725E5390AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED41ED5-BFE0-4629-80B5-D725E5390AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ED41ED5-BFE0-4629-80B5-D725E5390AF6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{61521FF5-4948-4F69-B3B9-755953BF329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61521FF5-4948-4F69-B3B9-755953BF329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61521FF5-4948-4F69-B3B9-755953BF329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61521FF5-4948-4F69-B3B9-755953BF329F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
