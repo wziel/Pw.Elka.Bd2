@@ -3,7 +3,7 @@
     [isbn]        BIGINT          NULL,
     [nazwa]       VARCHAR (50)    NOT NULL,
     [rok]         SMALLINT        NOT NULL,
-    [zdjecie]     VARBINARY (MAX) NOT NULL,
+    [zdjecie]     VARBINARY (MAX) NULL,
     [dostepna_od] DATE            NULL,
     [wypozyczona] BIT             NOT NULL,
     [id_dzial]    SMALLINT        NOT NULL,
@@ -14,6 +14,8 @@
     CONSTRAINT [FK_Pozycja_Seria] FOREIGN KEY ([id_seria]) REFERENCES [dbo].[Seria] ([id_seria]),
     CONSTRAINT [FK_Pozycja_Typ] FOREIGN KEY ([id_typ]) REFERENCES [dbo].[Typ] ([id_typ])
 );
+
+
 
 
 
