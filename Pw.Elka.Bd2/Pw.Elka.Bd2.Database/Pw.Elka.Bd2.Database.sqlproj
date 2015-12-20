@@ -71,5 +71,9 @@
     <Build Include="dbo\Tables\Gatunek.sql" />
     <Build Include="dbo\Tables\Dzial.sql" />
     <Build Include="dbo\Tables\Autor.sql" />
+    <Build Include="dbo\Tables\Rezerwacja.sql" />
+    <Build Include="dbo\Tables\Pozycja.sql" />
+    <Build Include="dbo\Tables\Klient_Poufne.sql" />
+    <Build Include="dbo\Tables\Klient.sql" />
   </ItemGroup>
 </Project>
