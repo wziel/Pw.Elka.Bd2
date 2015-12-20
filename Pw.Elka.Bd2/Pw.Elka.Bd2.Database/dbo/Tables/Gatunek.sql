@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Gatunek] (
+    [id_gatunek] SMALLINT     NOT NULL,
+    [nazwa]      VARCHAR (30) NOT NULL
+);
+
