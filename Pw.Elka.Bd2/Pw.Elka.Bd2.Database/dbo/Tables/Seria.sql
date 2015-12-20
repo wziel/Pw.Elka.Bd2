@@ -7,3 +7,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [INDEX_Seria_issn]
+    ON [dbo].[Seria]([issn] ASC);
+
