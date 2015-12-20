@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28f13dc4d05b4594b9948fe4ce476039" Name="Diagram1">
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Autor" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Dzial" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Gatunek" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Klient" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Klient_Poufne" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Pozycja" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Rewers" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Rezerwacja" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Seria" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Pw.Elka.Bd2.Tests.Model.Typ" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Pozycja_Dzial" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Klient_Poufne_Klient" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Rewers_Klient" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Rezerwacja_Klient" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Pozycja_Seria" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Pozycja_Typ" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Rewers_Pozycja" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.FK_Rezerwacja_Pozycja" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.Pozycja_autor" ManuallyRouted="false" />
+        <AssociationConnector Association="Pw.Elka.Bd2.Tests.Model.Pozycja_gatunek" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
