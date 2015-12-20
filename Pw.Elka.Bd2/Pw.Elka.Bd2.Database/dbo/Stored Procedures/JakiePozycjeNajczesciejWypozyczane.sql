@@ -14,11 +14,11 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-
+	SET ROWCOUNT 1
 	SELECT Pozycja.id_pozycja, Pozycja.nazwa, COUNT(*) AS liczba_wypozyczen
 	FROM Pozycja LEFT JOIN Rewers ON Rewers.id_pozycja=Pozycja.id_pozycja
 	WHERE Rewers.data_od > @od
 	AND Rewers.data_do < @do
 	GROUP BY Pozycja.id_pozycja, Pozycja.nazwa
-
+	ORDER BY liczba_wypozyczen DESC
 END
