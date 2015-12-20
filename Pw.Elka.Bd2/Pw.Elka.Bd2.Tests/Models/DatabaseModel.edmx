@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Pw.Elka.Bd2.Tests.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="id_autor" />
+          </Key>
+          <Property Name="id_autor" Type="int" Nullable="false" />
+          <Property Name="imiona" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwiska" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dzial">
+          <Key>
+            <PropertyRef Name="id_dzial" />
+          </Key>
+          <Property Name="id_dzial" Type="smallint" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gatunek">
+          <Key>
+            <PropertyRef Name="id_gatunek" />
+          </Key>
+          <Property Name="id_gatunek" Type="smallint" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="int" Nullable="false" />
+          <Property Name="imiona" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwiska" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="telefon" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="kara" Type="decimal" Precision="9" Scale="2" />
+        </EntityType>
+        <EntityType Name="Klient_Poufne">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="int" Nullable="false" />
+          <Property Name="pesel" Type="int" Nullable="false" />
+          <Property Name="adres" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pozycja">
+          <Key>
+            <PropertyRef Name="id_pozycja" />
+          </Key>
+          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="isbn" Type="bigint" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rok" Type="smallint" Nullable="false" />
+          <Property Name="zdjecie" Type="varbinary(max)" Nullable="false" />
+          <Property Name="dostepna_od" Type="date" />
+          <Property Name="wypozyczona" Type="bit" Nullable="false" />
+          <Property Name="id_dzial" Type="smallint" Nullable="false" />
+          <Property Name="id_seria" Type="int" />
+          <Property Name="id_typ" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pozycja_autor">
+          <Key>
+            <PropertyRef Name="id_pozycja" />
+            <PropertyRef Name="id_autor" />
+          </Key>
+          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="id_autor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pozycja_gatunek">
+          <Key>
+            <PropertyRef Name="id_pozycja" />
+            <PropertyRef Name="id_gatunek" />
+          </Key>
+          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="id_gatunek" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rewers">
+          <Key>
+            <PropertyRef Name="id_rewers" />
+          </Key>
+          <Property Name="id_rewers" Type="int" Nullable="false" />
+          <Property Name="data_od" Type="date" Nullable="false" />
+          <Property Name="data_do" Type="date" Nullable="false" />
+          <Property Name="data_zwrotu" Type="date" />
+          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="id_klient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezerwacja">
+          <Key>
+            <PropertyRef Name="id_rezerwacja" />
+          </Key>
+          <Property Name="id_rezerwacja" Type="int" Nullable="false" />
+          <Property Name="data_rezerwacji" Type="date" Nullable="false" />
+          <Property Name="gotowe_od" Type="date" />
+          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="id_klient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seria">
+          <Key>
+            <PropertyRef Name="id_seria" />
+          </Key>
+          <Property Name="id_seria" Type="int" Nullable="false" />
+          <Property Name="issn" Type="int" />
+          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Typ">
+          <Key>
+            <PropertyRef Name="id_typ" />
+          </Key>
+          <Property Name="id_typ" Type="smallint" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Klient_Poufne_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Klient_Poufne" Type="Self.Klient_Poufne" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Klient_Poufne">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_autor_ToTable">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Pozycja_autor" Type="Self.Pozycja_autor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Pozycja_autor">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_autor_ToTable_1">
+          <End Role="Autor" Type="Self.Autor" Multiplicity="1" />
+          <End Role="Pozycja_autor" Type="Self.Pozycja_autor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autor">
+              <PropertyRef Name="id_autor" />
+            </Principal>
+            <Dependent Role="Pozycja_autor">
+              <PropertyRef Name="id_autor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_Dzial">
+          <End Role="Dzial" Type="Self.Dzial" Multiplicity="1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzial">
+              <PropertyRef Name="id_dzial" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_dzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_gatunek_Gatunek">
+          <End Role="Gatunek" Type="Self.Gatunek" Multiplicity="1" />
+          <End Role="Pozycja_gatunek" Type="Self.Pozycja_gatunek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gatunek">
+              <PropertyRef Name="id_gatunek" />
+            </Principal>
+            <Dependent Role="Pozycja_gatunek">
+              <PropertyRef Name="id_gatunek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_gatunek_Pozycja">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Pozycja_gatunek" Type="Self.Pozycja_gatunek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Pozycja_gatunek">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_Seria">
+          <End Role="Seria" Type="Self.Seria" Multiplicity="0..1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seria">
+              <PropertyRef Name="id_seria" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_seria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_Typ">
+          <End Role="Typ" Type="Self.Typ" Multiplicity="1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Typ">
+              <PropertyRef Name="id_typ" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_typ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewers_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Rewers" Type="Self.Rewers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Rewers">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewers_Pozycja">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Rewers" Type="Self.Rewers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Rewers">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezerwacja_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezerwacja_Pozycja">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PwElkaBd2TestsModelStoreContainer">
+          <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dzial" EntityType="Self.Dzial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gatunek" EntityType="Self.Gatunek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient_Poufne" EntityType="Self.Klient_Poufne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pozycja" EntityType="Self.Pozycja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pozycja_autor" EntityType="Self.Pozycja_autor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pozycja_gatunek" EntityType="Self.Pozycja_gatunek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rewers" EntityType="Self.Rewers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seria" EntityType="Self.Seria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Typ" EntityType="Self.Typ" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Klient_Poufne_Klient" Association="Self.FK_Klient_Poufne_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Klient_Poufne" EntitySet="Klient_Poufne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_autor_ToTable" Association="Self.FK_Pozycja_autor_ToTable">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Pozycja_autor" EntitySet="Pozycja_autor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_autor_ToTable_1" Association="Self.FK_Pozycja_autor_ToTable_1">
+            <End Role="Autor" EntitySet="Autor" />
+            <End Role="Pozycja_autor" EntitySet="Pozycja_autor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_Dzial" Association="Self.FK_Pozycja_Dzial">
+            <End Role="Dzial" EntitySet="Dzial" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_gatunek_Gatunek" Association="Self.FK_Pozycja_gatunek_Gatunek">
+            <End Role="Gatunek" EntitySet="Gatunek" />
+            <End Role="Pozycja_gatunek" EntitySet="Pozycja_gatunek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_gatunek_Pozycja" Association="Self.FK_Pozycja_gatunek_Pozycja">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Pozycja_gatunek" EntitySet="Pozycja_gatunek" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_Seria" Association="Self.FK_Pozycja_Seria">
+            <End Role="Seria" EntitySet="Seria" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_Typ" Association="Self.FK_Pozycja_Typ">
+            <End Role="Typ" EntitySet="Typ" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewers_Klient" Association="Self.FK_Rewers_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Rewers" EntitySet="Rewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewers_Pozycja" Association="Self.FK_Rewers_Pozycja">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Rewers" EntitySet="Rewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezerwacja_Klient" Association="Self.FK_Rezerwacja_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezerwacja_Pozycja" Association="Self.FK_Rezerwacja_Pozycja">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Pw.Elka.Bd2.Tests.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autor">
+          <Key>
+            <PropertyRef Name="id_autor" />
+          </Key>
+          <Property Name="id_autor" Type="Int32" Nullable="false" />
+          <Property Name="imiona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwiska" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.Pozycja_autor" FromRole="Autor" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Dzial">
+          <Key>
+            <PropertyRef Name="id_dzial" />
+          </Key>
+          <Property Name="id_dzial" Type="Int16" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Dzial" FromRole="Dzial" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Gatunek">
+          <Key>
+            <PropertyRef Name="id_gatunek" />
+          </Key>
+          <Property Name="id_gatunek" Type="Int16" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.Pozycja_gatunek" FromRole="Gatunek" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <Property Name="imiona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwiska" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="kara" Type="Decimal" Precision="9" Scale="2" />
+          <NavigationProperty Name="Klient_Poufne" Relationship="Self.FK_Klient_Poufne_Klient" FromRole="Klient" ToRole="Klient_Poufne" />
+          <NavigationProperty Name="Rewers" Relationship="Self.FK_Rewers_Klient" FromRole="Klient" ToRole="Rewers" />
+          <NavigationProperty Name="Rezerwacja" Relationship="Self.FK_Rezerwacja_Klient" FromRole="Klient" ToRole="Rezerwacja" />
+        </EntityType>
+        <EntityType Name="Klient_Poufne">
+          <Key>
+            <PropertyRef Name="id_klient" />
+          </Key>
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <Property Name="pesel" Type="Int64" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK_Klient_Poufne_Klient" FromRole="Klient_Poufne" ToRole="Klient" />
+        </EntityType>
+        <EntityType Name="Pozycja">
+          <Key>
+            <PropertyRef Name="id_pozycja" />
+          </Key>
+          <Property Name="id_pozycja" Type="Int32" Nullable="false" />
+          <Property Name="isbn" Type="Int64" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rok" Type="Int16" Nullable="false" />
+          <Property Name="zdjecie" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="dostepna_od" Type="DateTime" Precision="0" />
+          <Property Name="wypozyczona" Type="Boolean" Nullable="false" />
+          <Property Name="id_dzial" Type="Int16" Nullable="false" />
+          <Property Name="id_seria" Type="Int32" />
+          <Property Name="id_typ" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Dzial" Relationship="Self.FK_Pozycja_Dzial" FromRole="Pozycja" ToRole="Dzial" />
+          <NavigationProperty Name="Seria" Relationship="Self.FK_Pozycja_Seria" FromRole="Pozycja" ToRole="Seria" />
+          <NavigationProperty Name="Typ" Relationship="Self.FK_Pozycja_Typ" FromRole="Pozycja" ToRole="Typ" />
+          <NavigationProperty Name="Rewers" Relationship="Self.FK_Rewers_Pozycja" FromRole="Pozycja" ToRole="Rewers" />
+          <NavigationProperty Name="Rezerwacja" Relationship="Self.FK_Rezerwacja_Pozycja" FromRole="Pozycja" ToRole="Rezerwacja" />
+          <NavigationProperty Name="Autor" Relationship="Self.Pozycja_autor" FromRole="Pozycja" ToRole="Autor" />
+          <NavigationProperty Name="Gatunek" Relationship="Self.Pozycja_gatunek" FromRole="Pozycja" ToRole="Gatunek" />
+        </EntityType>
+        <EntityType Name="Rewers">
+          <Key>
+            <PropertyRef Name="id_rewers" />
+          </Key>
+          <Property Name="id_rewers" Type="Int32" Nullable="false" />
+          <Property Name="data_od" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_do" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_zwrotu" Type="DateTime" Precision="0" />
+          <Property Name="id_pozycja" Type="Int32" Nullable="false" />
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK_Rewers_Klient" FromRole="Rewers" ToRole="Klient" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.FK_Rewers_Pozycja" FromRole="Rewers" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Rezerwacja">
+          <Key>
+            <PropertyRef Name="id_rezerwacja" />
+          </Key>
+          <Property Name="id_rezerwacja" Type="Int32" Nullable="false" />
+          <Property Name="data_rezerwacji" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gotowe_od" Type="DateTime" Precision="0" />
+          <Property Name="id_pozycja" Type="Int32" Nullable="false" />
+          <Property Name="id_klient" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK_Rezerwacja_Klient" FromRole="Rezerwacja" ToRole="Klient" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.FK_Rezerwacja_Pozycja" FromRole="Rezerwacja" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Seria">
+          <Key>
+            <PropertyRef Name="id_seria" />
+          </Key>
+          <Property Name="id_seria" Type="Int32" Nullable="false" />
+          <Property Name="issn" Type="Int32" />
+          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Seria" FromRole="Seria" ToRole="Pozycja" />
+        </EntityType>
+        <EntityType Name="Typ">
+          <Key>
+            <PropertyRef Name="id_typ" />
+          </Key>
+          <Property Name="id_typ" Type="Int16" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Typ" FromRole="Typ" ToRole="Pozycja" />
+        </EntityType>
+        <Association Name="FK_Pozycja_Dzial">
+          <End Role="Dzial" Type="Self.Dzial" Multiplicity="1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzial">
+              <PropertyRef Name="id_dzial" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_dzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Klient_Poufne_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Klient_Poufne" Type="Self.Klient_Poufne" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Klient_Poufne">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewers_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Rewers" Type="Self.Rewers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Rewers">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezerwacja_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="id_klient" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="id_klient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_Seria">
+          <End Role="Seria" Type="Self.Seria" Multiplicity="0..1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seria">
+              <PropertyRef Name="id_seria" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_seria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pozycja_Typ">
+          <End Role="Typ" Type="Self.Typ" Multiplicity="1" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Typ">
+              <PropertyRef Name="id_typ" />
+            </Principal>
+            <Dependent Role="Pozycja">
+              <PropertyRef Name="id_typ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rewers_Pozycja">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Rewers" Type="Self.Rewers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Rewers">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezerwacja_Pozycja">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="1" />
+          <End Role="Rezerwacja" Type="Self.Rezerwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pozycja">
+              <PropertyRef Name="id_pozycja" />
+            </Principal>
+            <Dependent Role="Rezerwacja">
+              <PropertyRef Name="id_pozycja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pozycja_autor">
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+          <End Role="Autor" Type="Self.Autor" Multiplicity="*" />
+        </Association>
+        <Association Name="Pozycja_gatunek">
+          <End Role="Gatunek" Type="Self.Gatunek" Multiplicity="*" />
+          <End Role="Pozycja" Type="Self.Pozycja" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autor" EntityType="Self.Autor" />
+          <EntitySet Name="Dzial" EntityType="Self.Dzial" />
+          <EntitySet Name="Gatunek" EntityType="Self.Gatunek" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="Klient_Poufne" EntityType="Self.Klient_Poufne" />
+          <EntitySet Name="Pozycja" EntityType="Self.Pozycja" />
+          <EntitySet Name="Rewers" EntityType="Self.Rewers" />
+          <EntitySet Name="Rezerwacja" EntityType="Self.Rezerwacja" />
+          <EntitySet Name="Seria" EntityType="Self.Seria" />
+          <EntitySet Name="Typ" EntityType="Self.Typ" />
+          <AssociationSet Name="FK_Pozycja_Dzial" Association="Self.FK_Pozycja_Dzial">
+            <End Role="Dzial" EntitySet="Dzial" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Klient_Poufne_Klient" Association="Self.FK_Klient_Poufne_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Klient_Poufne" EntitySet="Klient_Poufne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewers_Klient" Association="Self.FK_Rewers_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Rewers" EntitySet="Rewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezerwacja_Klient" Association="Self.FK_Rezerwacja_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_Seria" Association="Self.FK_Pozycja_Seria">
+            <End Role="Seria" EntitySet="Seria" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pozycja_Typ" Association="Self.FK_Pozycja_Typ">
+            <End Role="Typ" EntitySet="Typ" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rewers_Pozycja" Association="Self.FK_Rewers_Pozycja">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Rewers" EntitySet="Rewers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezerwacja_Pozycja" Association="Self.FK_Rezerwacja_Pozycja">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Rezerwacja" EntitySet="Rezerwacja" />
+          </AssociationSet>
+          <AssociationSet Name="Pozycja_autor" Association="Self.Pozycja_autor">
+            <End Role="Pozycja" EntitySet="Pozycja" />
+            <End Role="Autor" EntitySet="Autor" />
+          </AssociationSet>
+          <AssociationSet Name="Pozycja_gatunek" Association="Self.Pozycja_gatunek">
+            <End Role="Gatunek" EntitySet="Gatunek" />
+            <End Role="Pozycja" EntitySet="Pozycja" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PwElkaBd2TestsModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Autor">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Autor">
+              <MappingFragment StoreEntitySet="Autor">
+                <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+                <ScalarProperty Name="imiona" ColumnName="imiona" />
+                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dzial">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Dzial">
+              <MappingFragment StoreEntitySet="Dzial">
+                <ScalarProperty Name="id_dzial" ColumnName="id_dzial" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gatunek">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Gatunek">
+              <MappingFragment StoreEntitySet="Gatunek">
+                <ScalarProperty Name="id_gatunek" ColumnName="id_gatunek" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+                <ScalarProperty Name="imiona" ColumnName="imiona" />
+                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="kara" ColumnName="kara" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient_Poufne">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Klient_Poufne">
+              <MappingFragment StoreEntitySet="Klient_Poufne">
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+                <ScalarProperty Name="pesel" ColumnName="pesel" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pozycja">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Pozycja">
+              <MappingFragment StoreEntitySet="Pozycja">
+                <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="rok" ColumnName="rok" />
+                <ScalarProperty Name="zdjecie" ColumnName="zdjecie" />
+                <ScalarProperty Name="dostepna_od" ColumnName="dostepna_od" />
+                <ScalarProperty Name="wypozyczona" ColumnName="wypozyczona" />
+                <ScalarProperty Name="id_dzial" ColumnName="id_dzial" />
+                <ScalarProperty Name="id_seria" ColumnName="id_seria" />
+                <ScalarProperty Name="id_typ" ColumnName="id_typ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rewers">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Rewers">
+              <MappingFragment StoreEntitySet="Rewers">
+                <ScalarProperty Name="id_rewers" ColumnName="id_rewers" />
+                <ScalarProperty Name="data_od" ColumnName="data_od" />
+                <ScalarProperty Name="data_do" ColumnName="data_do" />
+                <ScalarProperty Name="data_zwrotu" ColumnName="data_zwrotu" />
+                <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezerwacja">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Rezerwacja">
+              <MappingFragment StoreEntitySet="Rezerwacja">
+                <ScalarProperty Name="id_rezerwacja" ColumnName="id_rezerwacja" />
+                <ScalarProperty Name="data_rezerwacji" ColumnName="data_rezerwacji" />
+                <ScalarProperty Name="gotowe_od" ColumnName="gotowe_od" />
+                <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seria">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Seria">
+              <MappingFragment StoreEntitySet="Seria">
+                <ScalarProperty Name="id_seria" ColumnName="id_seria" />
+                <ScalarProperty Name="issn" ColumnName="issn" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Typ">
+            <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Typ">
+              <MappingFragment StoreEntitySet="Typ">
+                <ScalarProperty Name="id_typ" ColumnName="id_typ" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Pozycja_autor" TypeName="Pw.Elka.Bd2.Tests.Model.Pozycja_autor" StoreEntitySet="Pozycja_autor">
+            <EndProperty Name="Pozycja">
+              <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+            </EndProperty>
+            <EndProperty Name="Autor">
+              <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Pozycja_gatunek" TypeName="Pw.Elka.Bd2.Tests.Model.Pozycja_gatunek" StoreEntitySet="Pozycja_gatunek">
+            <EndProperty Name="Gatunek">
+              <ScalarProperty Name="id_gatunek" ColumnName="id_gatunek" />
+            </EndProperty>
+            <EndProperty Name="Pozycja">
+              <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
