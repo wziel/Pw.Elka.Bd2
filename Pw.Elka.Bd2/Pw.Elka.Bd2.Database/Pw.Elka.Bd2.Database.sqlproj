@@ -61,6 +61,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Typ.sql" />
@@ -75,5 +76,10 @@
     <Build Include="dbo\Tables\Pozycja.sql" />
     <Build Include="dbo\Tables\Klient_Poufne.sql" />
     <Build Include="dbo\Tables\Klient.sql" />
+    <Build Include="dbo\Stored Procedures\Kiedy_dostepna.sql" />
+    <Build Include="dbo\Stored Procedures\Jaki_autor_najczesciej.sql" />
+    <Build Include="dbo\Stored Procedures\JakieRezerwacjeGotoweDoOdebrania.sql" />
+    <Build Include="dbo\Stored Procedures\JakiePozycjeNajczesciejWypozyczane.sql" />
+    <Build Include="dbo\Stored Procedures\IleWypozyczonych.sql" />
   </ItemGroup>
 </Project>
