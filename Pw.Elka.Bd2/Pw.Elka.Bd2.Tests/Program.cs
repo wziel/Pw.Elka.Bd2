@@ -21,12 +21,12 @@ namespace Pw.Elka.Bd2.Tests
             using (var ctx = new Entities())
             {
                 DatabaseCleanup.Start(ctx);
-                //GenerateDzials(ctx);
-                //GenerateGatuneks(ctx);
+                GenerateDzials(ctx);
+                GenerateGatuneks(ctx);
                 GenerateTyps(ctx);
-                //GenerateSerias(ctx, _seriasCount);
-                //GenerateAutors(ctx, _autorsCount);
-                //GenerateKlients(ctx, _klientsCount);
+                GenerateSerias(ctx, _seriasCount);
+                GenerateAutors(ctx, _autorsCount);
+                GenerateKlients(ctx, _klientsCount);
 
                 try
                 {
@@ -34,7 +34,7 @@ namespace Pw.Elka.Bd2.Tests
                 }
                 catch (Exception e)
                 {
-
+                    throw e;
                 }
             }
 
@@ -49,7 +49,7 @@ namespace Pw.Elka.Bd2.Tests
                     }
                     catch (Exception e)
                     {
-
+                        throw e;
                     }
                 }
             }
@@ -115,7 +115,6 @@ namespace Pw.Elka.Bd2.Tests
                 klient_poufnes.Add(DataCreator.CreateRandomKlientPoufne());
                 klient.Add(DataCreator.CreateRandomKlient(klient_poufnes[i]));
             }
-            //ctx.Klient_Poufne.AddRange(klient_poufnes);
             ctx.Klient.AddRange(klient);
         }
     }

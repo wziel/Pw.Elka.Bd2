@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Seria] (
-    [id_seria] INT          NOT NULL,
+    [id_seria] INT          NOT NULL IDENTITY,
     [issn]     INT          NULL,
     [nazwa]    VARCHAR (100) NOT NULL,
     CONSTRAINT [PK_Seria] PRIMARY KEY CLUSTERED ([id_seria] ASC)

@@ -9,7 +9,6 @@ namespace Pw.Elka.Bd2.Tests
 {
     public static class DataCreator
     {
-
         private static List<string> _firstPersonNames = new List<string>() { "Joanna", "Michał", "Kacper", "Wojciech", "Judyta", "Ksawery", "Łukasz" };
         private static List<string> _lastPersonrNames = new List<string>() { "Raczyńska", "Kacperski", "Mudel", "Zieliński", "Kowalski", "Nowak" };
 
@@ -66,19 +65,10 @@ namespace Pw.Elka.Bd2.Tests
             return new Autor()
             {
                 imiona = string.Join(" ", GetRandomCollectionFromWithMaxCount(_firstPersonNames, 3).ToArray()),
-                nazwiska = string.Join(" ", GetRandomCollectionFromWithMaxCount(_secondBookaWord, 3).ToArray())
+                nazwiska = string.Join(" ", GetRandomCollectionFromWithMaxCount(_lastPersonrNames, 3).ToArray())
 
             };
         }
-        //public static List<Autor> GetAutorCollection(int count)
-        //{
-        //    var list = new List<Autor>();
-        //    while (count-- > 0)
-        //    {
-        //        list.Add(CreateRandomAutor());
-        //    }
-        //    return list;
-        //}
 
         public static List<Gatunek> GetGatunekCollection()
         {
@@ -119,15 +109,6 @@ namespace Pw.Elka.Bd2.Tests
                 + GetRandomElementFrom(_thirdBookWord)
             };
         }
-        //public static List<Seria> GetSeriaCollection(int count)
-        //{
-        //    var list = new List<Seria>();
-        //    while (count-- > 0)
-        //    {
-        //        list.Add(CreateRandomSeria());
-        //    }
-        //    return list;
-        //}
 
         public static List<Typ> GetTypCollection()
         {
@@ -163,22 +144,12 @@ namespace Pw.Elka.Bd2.Tests
             };
         }
 
-        //public static List<Pozycja> GetPozycjaCollection(IReadOnlyList<Dzial> dzials, IReadOnlyList<Seria> serias, IReadOnlyList<Typ> typs, int count)
-        //{
-        //    var list = new List<Pozycja>();
-        //    while (count-- > 0)
-        //    {
-        //        list.Add(CreateRandomPozycja(dzials, serias, typs));
-        //    }
-        //    return list;
-        //}
-
         public static Klient CreateRandomKlient(Klient_Poufne poufne)
         {
             return new Klient()
             {
                 imiona = string.Join(" ", GetRandomCollectionFromWithMaxCount(_firstPersonNames, 3).ToArray()),
-                nazwiska = string.Join(" ", GetRandomCollectionFromWithMaxCount(_secondBookaWord, 3).ToArray()),
+                nazwiska = string.Join(" ", GetRandomCollectionFromWithMaxCount(_lastPersonrNames, 3).ToArray()),
                 email = GetRandomElementFrom(_firstEmailParts) + "@" + GetRandomElementFrom(_secondEmailPart),
                 telefon = Random.Next(100000000, 999999999).ToString(),
                 kara = 0,
@@ -186,22 +157,13 @@ namespace Pw.Elka.Bd2.Tests
                 Klient_Poufne = poufne
             };
         }
-        //public static List<Klient> GetKlientCollection(int count)
-        //{
-        //    var list = new List<Klient>();
-        //    while (count-- > 0)
-        //    {
-        //        list.Add(CreateRandomKlient());
-        //    }
-        //    return list;
-        //}
 
         public static Klient_Poufne CreateRandomKlientPoufne()
         {
             return new Klient_Poufne()
             {
                 pesel = LongRandom(10000000000, 99999999999, Random),
-                adres = GetRandomElementFrom(_streetName) + (Random.Next(200) + 1) + "/" + (Random.Next(200) + 1)
+                adres = GetRandomElementFrom(_streetName) + " " + (Random.Next(200) + 1) + "/" + (Random.Next(200) + 1)
             };
         }
         //public static List<Klient_Poufne> GetKlientPoufneCollection(int count)

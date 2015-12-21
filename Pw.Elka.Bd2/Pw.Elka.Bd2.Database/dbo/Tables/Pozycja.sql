@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Pozycja] (
-    [id_pozycja]  INT             NOT NULL,
+    [id_pozycja]  INT             NOT NULL IDENTITY,
     [isbn]        BIGINT          NULL,
     [nazwa]       VARCHAR (100)    NOT NULL,
     [rok]         SMALLINT        NOT NULL,

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id_autor" />
           </Key>
-          <Property Name="id_autor" Type="int" Nullable="false" />
+          <Property Name="id_autor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="imiona" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nazwiska" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -17,21 +17,21 @@
           <Key>
             <PropertyRef Name="id_dzial" />
           </Key>
-          <Property Name="id_dzial" Type="smallint" Nullable="false" />
+          <Property Name="id_dzial" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Gatunek">
           <Key>
             <PropertyRef Name="id_gatunek" />
           </Key>
-          <Property Name="id_gatunek" Type="smallint" Nullable="false" />
+          <Property Name="id_gatunek" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Klient">
           <Key>
             <PropertyRef Name="id_klient" />
           </Key>
-          <Property Name="id_klient" Type="int" Nullable="false" />
+          <Property Name="id_klient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="imiona" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nazwiska" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="id_pozycja" />
           </Key>
-          <Property Name="id_pozycja" Type="int" Nullable="false" />
+          <Property Name="id_pozycja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="isbn" Type="bigint" />
           <Property Name="nazwa" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="rok" Type="smallint" Nullable="false" />
@@ -82,7 +82,7 @@
           <Key>
             <PropertyRef Name="id_rewers" />
           </Key>
-          <Property Name="id_rewers" Type="int" Nullable="false" />
+          <Property Name="id_rewers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="data_od" Type="date" Nullable="false" />
           <Property Name="data_do" Type="date" Nullable="false" />
           <Property Name="data_zwrotu" Type="date" />
@@ -93,7 +93,7 @@
           <Key>
             <PropertyRef Name="id_rezerwacja" />
           </Key>
-          <Property Name="id_rezerwacja" Type="int" Nullable="false" />
+          <Property Name="id_rezerwacja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="data_rezerwacji" Type="date" Nullable="false" />
           <Property Name="gotowe_od" Type="date" />
           <Property Name="id_pozycja" Type="int" Nullable="false" />
@@ -103,7 +103,7 @@
           <Key>
             <PropertyRef Name="id_seria" />
           </Key>
-          <Property Name="id_seria" Type="int" Nullable="false" />
+          <Property Name="id_seria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="issn" Type="int" />
           <Property Name="nazwa" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -111,7 +111,7 @@
           <Key>
             <PropertyRef Name="id_typ" />
           </Key>
-          <Property Name="id_typ" Type="smallint" Nullable="false" />
+          <Property Name="id_typ" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Klient_Poufne_Klient">

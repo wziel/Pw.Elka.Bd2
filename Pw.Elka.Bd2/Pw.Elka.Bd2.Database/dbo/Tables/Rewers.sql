@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Rewers] (
-    [id_rewers]   INT  NOT NULL,
+    [id_rewers]   INT  NOT NULL IDENTITY,
     [data_od]     DATE NOT NULL,
     [data_do]     DATE NOT NULL,
     [data_zwrotu] DATE NULL,
