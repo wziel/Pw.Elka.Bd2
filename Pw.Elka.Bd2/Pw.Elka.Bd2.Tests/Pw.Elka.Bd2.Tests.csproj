@@ -54,7 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataExamples.cs" />
+    <Compile Include="DatabaseCleanup.cs" />
+    <Compile Include="DataCreator.cs" />
     <Compile Include="Models\Autor.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>

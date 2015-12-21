@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pw.Elka.Bd2.Tests.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Pw.Elka.Bd2.Tests.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Autor">
           <Key>
             <PropertyRef Name="id_autor" />
@@ -18,14 +18,14 @@
             <PropertyRef Name="id_dzial" />
           </Key>
           <Property Name="id_dzial" Type="smallint" Nullable="false" />
-          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Gatunek">
           <Key>
             <PropertyRef Name="id_gatunek" />
           </Key>
           <Property Name="id_gatunek" Type="smallint" Nullable="false" />
-          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Klient">
           <Key>
@@ -37,14 +37,15 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="telefon" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="kara" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="liczba_wypozyczonych" Type="tinyint" />
         </EntityType>
         <EntityType Name="Klient_Poufne">
           <Key>
             <PropertyRef Name="id_klient" />
           </Key>
           <Property Name="id_klient" Type="int" Nullable="false" />
-          <Property Name="pesel" Type="int" Nullable="false" />
-          <Property Name="adres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pesel" Type="bigint" Nullable="false" />
+          <Property Name="adres" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Pozycja">
           <Key>
@@ -52,9 +53,9 @@
           </Key>
           <Property Name="id_pozycja" Type="int" Nullable="false" />
           <Property Name="isbn" Type="bigint" />
-          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="rok" Type="smallint" Nullable="false" />
-          <Property Name="zdjecie" Type="varbinary(max)" Nullable="false" />
+          <Property Name="zdjecie" Type="varbinary(max)" />
           <Property Name="dostepna_od" Type="date" />
           <Property Name="wypozyczona" Type="bit" Nullable="false" />
           <Property Name="id_dzial" Type="smallint" Nullable="false" />
@@ -104,14 +105,14 @@
           </Key>
           <Property Name="id_seria" Type="int" Nullable="false" />
           <Property Name="issn" Type="int" />
-          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Typ">
           <Key>
             <PropertyRef Name="id_typ" />
           </Key>
           <Property Name="id_typ" Type="smallint" Nullable="false" />
-          <Property Name="nazwa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Klient_Poufne_Klient">
           <End Role="Klient" Type="Self.Klient" Multiplicity="1" />
@@ -319,8 +320,7 @@
             <End Role="Rezerwacja" EntitySet="Rezerwacja" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Pw.Elka.Bd2.Tests.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,7 +338,7 @@
             <PropertyRef Name="id_dzial" />
           </Key>
           <Property Name="id_dzial" Type="Int16" Nullable="false" />
-          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Dzial" FromRole="Dzial" ToRole="Pozycja" />
         </EntityType>
         <EntityType Name="Gatunek">
@@ -346,7 +346,7 @@
             <PropertyRef Name="id_gatunek" />
           </Key>
           <Property Name="id_gatunek" Type="Int16" Nullable="false" />
-          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pozycja" Relationship="Self.Pozycja_gatunek" FromRole="Gatunek" ToRole="Pozycja" />
         </EntityType>
         <EntityType Name="Klient">
@@ -362,6 +362,7 @@
           <NavigationProperty Name="Klient_Poufne" Relationship="Self.FK_Klient_Poufne_Klient" FromRole="Klient" ToRole="Klient_Poufne" />
           <NavigationProperty Name="Rewers" Relationship="Self.FK_Rewers_Klient" FromRole="Klient" ToRole="Rewers" />
           <NavigationProperty Name="Rezerwacja" Relationship="Self.FK_Rezerwacja_Klient" FromRole="Klient" ToRole="Rezerwacja" />
+          <Property Name="liczba_wypozyczonych" Type="Byte" />
         </EntityType>
         <EntityType Name="Klient_Poufne">
           <Key>
@@ -369,7 +370,7 @@
           </Key>
           <Property Name="id_klient" Type="Int32" Nullable="false" />
           <Property Name="pesel" Type="Int64" Nullable="false" />
-          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Klient" Relationship="Self.FK_Klient_Poufne_Klient" FromRole="Klient_Poufne" ToRole="Klient" />
         </EntityType>
         <EntityType Name="Pozycja">
@@ -378,9 +379,9 @@
           </Key>
           <Property Name="id_pozycja" Type="Int32" Nullable="false" />
           <Property Name="isbn" Type="Int64" />
-          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="rok" Type="Int16" Nullable="false" />
-          <Property Name="zdjecie" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="zdjecie" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="dostepna_od" Type="DateTime" Precision="0" />
           <Property Name="wypozyczona" Type="Boolean" Nullable="false" />
           <Property Name="id_dzial" Type="Int16" Nullable="false" />
@@ -425,7 +426,7 @@
           </Key>
           <Property Name="id_seria" Type="Int32" Nullable="false" />
           <Property Name="issn" Type="Int32" />
-          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Seria" FromRole="Seria" ToRole="Pozycja" />
         </EntityType>
         <EntityType Name="Typ">
@@ -433,7 +434,7 @@
             <PropertyRef Name="id_typ" />
           </Key>
           <Property Name="id_typ" Type="Int16" Nullable="false" />
-          <Property Name="nazwa" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Pozycja" Relationship="Self.FK_Pozycja_Typ" FromRole="Typ" ToRole="Pozycja" />
         </EntityType>
         <Association Name="FK_Pozycja_Dzial">
@@ -626,6 +627,7 @@
           <EntitySetMapping Name="Klient">
             <EntityTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Klient">
               <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="liczba_wypozyczonych" ColumnName="liczba_wypozyczonych" />
                 <ScalarProperty Name="id_klient" ColumnName="id_klient" />
                 <ScalarProperty Name="imiona" ColumnName="imiona" />
                 <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />

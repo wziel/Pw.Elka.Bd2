@@ -27,6 +27,7 @@ namespace Pw.Elka.Bd2.Tests.Models
         public string email { get; set; }
         public string telefon { get; set; }
         public Nullable<decimal> kara { get; set; }
+        public Nullable<byte> liczba_wypozyczonych { get; set; }
     
         public virtual Klient_Poufne Klient_Poufne { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
