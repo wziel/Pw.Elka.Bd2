@@ -9,31 +9,36 @@ namespace Pw.Elka.Bd2.Tests
 {
     public static class DatabaseCleanup
     {
-        public static void Start(Entities dbContext)
+        private static void Clear<T>(this System.Data.Entity.DbSet<T> dbSet, Entities dbContext, int batchCount) where T : class
         {
-            using (var transaction = dbContext.Database.BeginTransaction())
+            while (dbSet.Count() > 0)
             {
+                dbSet.RemoveRange(dbSet.Take(batchCount));
                 try
                 {
-                    dbContext.Gatunek.RemoveRange(dbContext.Gatunek);
-                    dbContext.Autor.RemoveRange(dbContext.Autor);
-                    dbContext.Rewers.RemoveRange(dbContext.Rewers);
-                    dbContext.Rezerwacja.RemoveRange(dbContext.Rezerwacja);
-                    dbContext.Klient.RemoveRange(dbContext.Klient);
-                    dbContext.Klient_Poufne.RemoveRange(dbContext.Klient_Poufne);
-                    dbContext.Pozycja.RemoveRange(dbContext.Pozycja);
-                    dbContext.Typ.RemoveRange(dbContext.Typ);
-                    dbContext.Seria.RemoveRange(dbContext.Seria);
-                    dbContext.Dzial.RemoveRange(dbContext.Dzial);
-
                     dbContext.SaveChanges();
-                    transaction.Commit();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    transaction.Rollback();
                     throw ex;
                 }
+            }
+        }
+
+        public static void Start()
+        {
+            using (var dbContext = new Entities())
+            {
+                dbContext.Gatunek.Clear(dbContext, 10000);
+                dbContext.Autor.Clear(dbContext, 10000);
+                dbContext.Rewers.Clear(dbContext, 10000);
+                dbContext.Rezerwacja.Clear(dbContext, 10000);
+                dbContext.Klient_Poufne.Clear(dbContext, 10000);
+                dbContext.Klient.Clear(dbContext, 10000);
+                dbContext.Pozycja.Clear(dbContext, 10000);
+                dbContext.Typ.Clear(dbContext, 10000);
+                dbContext.Seria.Clear(dbContext, 10000);
+                dbContext.Dzial.Clear(dbContext, 10000);
             }
         }
     }

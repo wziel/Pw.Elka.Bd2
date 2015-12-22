@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="DatabaseCleanup.cs" />
     <Compile Include="DataCreator.cs" />
+    <Compile Include="DataGenerator.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Models\Autor.cs">
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
@@ -104,6 +106,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simulator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
