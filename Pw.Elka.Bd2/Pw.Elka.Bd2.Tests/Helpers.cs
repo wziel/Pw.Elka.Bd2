@@ -54,18 +54,29 @@ namespace Pw.Elka.Bd2.Tests
 
         public static T GetRandomElementFrom<T>(IQueryable<T> dbSet) where T : class
         {
-            return dbSet.OrderBy(r => Guid.NewGuid()).First();
+            var qry = from row in dbSet
+                      select row;
+
+            int count = qry.Count();
+            int index = new Random().Next(count);
+
+            return qry.OrderBy(e => 1).Skip(index).FirstOrDefault();
         }
 
         public static List<T> GetRandomCollectionFrom<T>(IQueryable<T> dbSet, int maxCount) where T : class
         {
             var count = Random.Next(maxCount) + 1;
-            return dbSet.OrderBy(r => Guid.NewGuid()).Take(count).ToList();
+            return GetRandomCollectionFromWithExactCount(dbSet, count);
         }
 
         public static List<T> GetRandomCollectionFromWithExactCount<T>(IQueryable<T> dbSet, int exactCount) where T : class
         {
-            return dbSet.OrderBy(r => Guid.NewGuid()).Take(exactCount).ToList();
+            var list = new List<T>();
+            for(int i = 0; i < exactCount; ++i)
+            {
+                list.Add(GetRandomElementFrom(dbSet));
+            }
+            return list;
         }
     }
 }

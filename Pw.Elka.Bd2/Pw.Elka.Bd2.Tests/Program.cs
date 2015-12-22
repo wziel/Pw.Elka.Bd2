@@ -14,26 +14,32 @@ namespace Pw.Elka.Bd2.Tests
 
         static void Main(string[] args)
         {
-            uint _seriasCount;
-            uint _autorsCount;
-            uint _pozycjasCount;
-            uint _klientsCount;
-            if (args.Contains("production"))
+            if(args.Contains("cleanup"))
             {
-                isProduction = true;
-                _seriasCount = 5000;
-                _autorsCount = 15000;
-                _pozycjasCount = 100000;
-                _klientsCount = 10000;
+                DatabaseCleanup.Start();
             }
-            _seriasCount = 50;
-            _autorsCount = 150;
-            _pozycjasCount = 1000;
-            _klientsCount = 100;
+            if(args.Contains("generate"))
+            {
+                uint _seriasCount;
+                uint _autorsCount;
+                uint _pozycjasCount;
+                uint _klientsCount;
+                if (args.Contains("production"))
+                {
+                    isProduction = true;
+                    _seriasCount = 5000;
+                    _autorsCount = 15000;
+                    _pozycjasCount = 100000;
+                    _klientsCount = 10000;
+                }
+                _seriasCount = 50;
+                _autorsCount = 150;
+                _pozycjasCount = 1000;
+                _klientsCount = 100;
 
-            DatabaseCleanup.Start();
-            DataGenerator.Generate(_seriasCount, _autorsCount, _pozycjasCount, _klientsCount);
-            Simulator.Simulate();
+                DataGenerator.Generate(_seriasCount, _autorsCount, _pozycjasCount, _klientsCount, isProduction);
+                Simulator.Simulate();
+            }
         }
     }
 }

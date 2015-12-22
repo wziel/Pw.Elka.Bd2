@@ -25,10 +25,32 @@ namespace Pw.Elka.Bd2.Tests
             }
         }
 
+        private static void ClearManyToManyRelations(Entities ctx)
+        {
+            foreach (var gatunek in ctx.Gatunek)
+            {
+                gatunek.Pozycja.Clear();
+            }
+            foreach (var autor in ctx.Autor)
+            {
+                autor.Pozycja.Clear();
+            }
+
+            try
+            {
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void Start()
         {
             using (var dbContext = new Entities())
             {
+                ClearManyToManyRelations(dbContext);
                 dbContext.Gatunek.Clear(dbContext, 10000);
                 dbContext.Autor.Clear(dbContext, 10000);
                 dbContext.Rewers.Clear(dbContext, 10000);
