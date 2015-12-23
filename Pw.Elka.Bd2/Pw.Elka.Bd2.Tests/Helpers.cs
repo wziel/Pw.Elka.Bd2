@@ -54,13 +54,10 @@ namespace Pw.Elka.Bd2.Tests
 
         public static T GetRandomElementFrom<T>(IQueryable<T> dbSet) where T : class
         {
-            var qry = from row in dbSet
-                      select row;
-
-            int count = qry.Count();
+            int count = dbSet.Select(x => 1).Count();
             int index = new Random().Next(count);
 
-            return qry.OrderBy(e => 1).Skip(index).FirstOrDefault();
+            return dbSet.OrderBy(e => 1).Skip(index).FirstOrDefault();
         }
 
         public static List<T> GetRandomCollectionFrom<T>(IQueryable<T> dbSet, int maxCount) where T : class

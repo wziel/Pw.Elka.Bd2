@@ -32,10 +32,13 @@ namespace Pw.Elka.Bd2.Tests
                     _pozycjasCount = 100000;
                     _klientsCount = 10000;
                 }
-                _seriasCount = 50;
-                _autorsCount = 150;
-                _pozycjasCount = 1000;
-                _klientsCount = 100;
+                else
+                {
+                    _seriasCount = 50;
+                    _autorsCount = 150;
+                    _pozycjasCount = 1000;
+                    _klientsCount = 100;
+                }
 
                 DataGenerator.Generate(_seriasCount, _autorsCount, _pozycjasCount, _klientsCount, isProduction);
                 Simulator.Simulate();

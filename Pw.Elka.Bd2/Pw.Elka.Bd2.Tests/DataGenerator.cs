@@ -53,18 +53,22 @@ namespace Pw.Elka.Bd2.Tests
 
         static void GenerateDzials(Entities ctx)
         {
+
+            Console.Write("\rZapisywanie dzialow                    ");
             var dzials = DataCreator.GetDzialCollection();
             ctx.Dzial.AddRange(dzials);
         }
 
         static void GenerateGatuneks(Entities ctx)
         {
+            Console.Write("\rZapisywanie gatunkow                      ");
             var gatuneks = DataCreator.GetGatunekCollection();
             ctx.Gatunek.AddRange(gatuneks);
         }
 
         static void GenerateTyps(Entities ctx)
         {
+            Console.Write("\rZapisywanie typow                          ");
             var typs = DataCreator.GetTypCollection();
             ctx.Typ.AddRange(typs);
         }
@@ -74,6 +78,7 @@ namespace Pw.Elka.Bd2.Tests
             var serias = new List<Seria>();
             for (int i = 0; i < count; ++i)
             {
+                Console.Write($"\rGenerowanie serii {i + 1}/{count}                         ");
                 serias.Add(DataCreator.CreateRandomSeria());
             }
             ctx.Seria.AddRange(serias);
@@ -84,6 +89,7 @@ namespace Pw.Elka.Bd2.Tests
             var autors = new List<Autor>();
             for (int i = 0; i < count; ++i)
             {
+                Console.Write($"\rGenerowanie autorow {i + 1}/{count}                               ");
                 autors.Add(DataCreator.CreateRandomAutor());
             }
             ctx.Autor.AddRange(autors);
@@ -94,6 +100,7 @@ namespace Pw.Elka.Bd2.Tests
             var pozycjas = new List<Pozycja>();
             for (int i = 0; i < count; ++i)
             {
+                Console.Write($"\rGenerowanie pozycji {i + 1}/{count}                               ");
                 pozycjas.Add(DataCreator.CreateRandomPozycja(ctx.Dzial, ctx.Seria, ctx.Typ, ctx.Autor, ctx.Gatunek, _isProduction));
             }
             ctx.Pozycja.AddRange(pozycjas);
@@ -105,6 +112,7 @@ namespace Pw.Elka.Bd2.Tests
             var klient = new List<Klient>();
             for (int i = 0; i < count; ++i)
             {
+                Console.Write($"\rGenerowanie klientów {i + 1}/{count}                                  ");
                 klient_poufnes.Add(DataCreator.CreateRandomKlientPoufne());
                 klient.Add(DataCreator.CreateRandomKlient(klient_poufnes[i]));
             }
