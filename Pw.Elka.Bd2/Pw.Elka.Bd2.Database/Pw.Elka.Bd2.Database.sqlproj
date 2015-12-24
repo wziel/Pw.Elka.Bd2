@@ -81,5 +81,8 @@
     <Build Include="dbo\Stored Procedures\JakieRezerwacjeGotoweDoOdebrania.sql" />
     <Build Include="dbo\Stored Procedures\JakiePozycjeNajczesciejWypozyczane.sql" />
     <Build Include="dbo\Stored Procedures\IleWypozyczonych.sql" />
+    <Build Include="dbo\Stored Procedures\IleSztukPoISBN.sql" />
+    <Build Include="dbo\Stored Procedures\IleSztukPoISSN.sql" />
+    <Build Include="dbo\Stored Procedures\JakieOsobyPrzetrzymywalyNajwiecej.sql" />
   </ItemGroup>
 </Project>
