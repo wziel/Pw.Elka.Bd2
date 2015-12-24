@@ -33,7 +33,7 @@ namespace Pw.Elka.Bd2.Tests
                 }
             }
 
-            uint pozycjasBatchCount = 1000;
+            uint pozycjasBatchCount = Math.Min(1000, pozycjasCount);
             for (uint i = 0; i < pozycjasCount; i += pozycjasBatchCount)
             {
                 using (var ctx = new Entities())

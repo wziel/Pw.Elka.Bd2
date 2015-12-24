@@ -10,14 +10,14 @@ namespace Pw.Elka.Bd2.Tests
 {
     public static class DataCreator
     {
-        private static List<string> _firstPersonNames = new List<string>() { "Joanna", "Michał", "Kacper", "Wojciech", "Judyta", "Ksawery", "Łukasz" };
-        private static List<string> _lastPersonrNames = new List<string>() { "Raczyńska", "Kacperski", "Mudel", "Zieliński", "Kowalski", "Nowak" };
+        private static List<string> _firstPersonNames = new List<string>() { "Joanna", "Michał", "Kacper", "Wojciech", "Judyta", "Ksawery", "Łukasz", "Joachim", "Barbara", "Klemens", "Bogusław", "Helena" };
+        private static List<string> _lastPersonrNames = new List<string>() { "Raczyńska", "Kacperski", "Mudel", "Zieliński", "Kowalski", "Nowak", "Kamiński", "Michalak" };
 
-        private static List<string> _firstBookWord = new List<string> { "Tańczące", "Kolorowe", "Drewniane", "Niezwyciężone", "Złośliwe", "Banalne" };
-        private static List<string> _secondBookaWord = new List<string> { "karły", "kobiety", "nieuanse", "powieści", "kałamarnice", "wnęki", "karabiny" };
-        private static List<string> _thirdBookWord = new List<string> { "ciemności", "Ameryki", "Polski", "hotelu", "Ryszarda Petru", "rynku", "szkoły" };
+        private static List<string> _firstBookWord = new List<string> { "Tańczące", "Kolorowe", "Drewniane", "Niezwyciężone", "Złośliwe", "Banalne", "Zagadkowe", "Okrągłe", "Tajemnicze", "Ogromne", "Piękne" };
+        private static List<string> _secondBookaWord = new List<string> { "karły", "kobiety", "nieuanse", "powieści", "kałamarnice", "wnęki", "karabiny", "obrazy", "komputery", "zagadki", "wykłady" };
+        private static List<string> _thirdBookWord = new List<string> { "ciemności", "Ameryki", "Polski", "hotelu", "Ryszarda Petru", "rynku", "szkoły", "z obozu", "na wykładzie", "podczas sylwestra", "w telewizji" };
 
-        private static List<string> _firstEmailParts = new List<string> { "Joanna", "Michał", "Kamil", "Zygmunt", "Janusz" };
+        private static List<string> _firstEmailParts = new List<string> { "Joanna", "Michał", "Kamil", "Zygmunt", "Janusz", "Barbara", "Marian" };
         private static List<string> _secondEmailPart = new List<string> { "wp.pl", "gmail.com", "outlook.com" };
 
         private static List<string> _streetName = new List<string>() { "Bakaliowa", "Wojska Polskiego", "Jana Pawła II", "Aleje Jerozolimskie", "Stefana Bryły", "Odyńca" };
