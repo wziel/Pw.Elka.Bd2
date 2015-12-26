@@ -1,6 +1,7 @@
 ﻿using Pw.Elka.Bd2.Tests.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Pw.Elka.Bd2.Tests
         {
             using (var ctx = new Entities())
             {
-                var avrgBookPerDay = ctx.Klient.Count();
+                var avrgBookPerDay = ctx.Klient.Count() / 30;
                 _minBooksPerDay = (int)(avrgBookPerDay * 0.75);
                 _maxBooksPerDay = (int)(avrgBookPerDay * 1.25);
 
@@ -69,9 +70,13 @@ namespace Pw.Elka.Bd2.Tests
             var reservationsWaitingCount = ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue
                 && r.Klient.liczba_wypozyczonych.HasValue && r.Klient.liczba_wypozyczonych < 3).Count();
             var toReceiveCount = reservationsWaitingCount == 1 ? 1 : reservationsWaitingCount / 2;
-            var toReceive = Helpers.GetRandomCollectionFromWithExactCount(ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue), toReceiveCount);
+            var toReceive = Helpers.GetRandomCollectionFromWithExactCount(ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue).Include(r => r.Klient), toReceiveCount);
             toReceive.ForEach(r =>
             {
+                if(!r.Klient.liczba_wypozyczonych.HasValue)
+                {
+                    r.Klient.liczba_wypozyczonych = 0;
+                }
                 if (r.Klient.liczba_wypozyczonych < 3)
                 {
                     CreateRewers(ctx, r.Klient, r.Pozycja);
@@ -175,7 +180,7 @@ namespace Pw.Elka.Bd2.Tests
         private static void HandleReturns(Entities ctx)
         {
             var comingReservationDate = _currDate.AddDays(10);
-            ctx.Rewers.Where(r => r.data_zwrotu == null && r.data_do < comingReservationDate).ToList().ForEach(r =>
+            ctx.Rewers.Where(r => r.data_zwrotu == null && r.data_do < comingReservationDate).Include(r => r.Klient).Include(r => r.Pozycja).ToList().ForEach(r =>
             {
                 if (Helpers.Random.Next(100) < 10)
                 {
