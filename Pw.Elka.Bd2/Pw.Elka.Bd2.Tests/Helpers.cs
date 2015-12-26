@@ -71,7 +71,11 @@ namespace Pw.Elka.Bd2.Tests
             var list = new List<T>();
             for(int i = 0; i < exactCount; ++i)
             {
-                list.Add(GetRandomElementFrom(dbSet));
+                var element = GetRandomElementFrom(dbSet);
+                if(element != null)
+                {
+                    list.Add(element);
+                }
             }
             return list;
         }

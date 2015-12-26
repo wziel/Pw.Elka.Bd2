@@ -31,7 +31,7 @@ namespace Pw.Elka.Bd2.Tests
         {
             using (var ctx = new Entities())
             {
-                var avrgBookPerDay = ctx.Pozycja.Count() / 2 / 30;
+                var avrgBookPerDay = ctx.Klient.Count();
                 _minBooksPerDay = (int)(avrgBookPerDay * 0.75);
                 _maxBooksPerDay = (int)(avrgBookPerDay * 1.25);
 

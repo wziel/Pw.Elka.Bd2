@@ -12,6 +12,8 @@ namespace Pw.Elka.Bd2.Tests.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities : DbContext
     {
@@ -35,5 +37,85 @@ namespace Pw.Elka.Bd2.Tests.Models
         public virtual DbSet<Rezerwacja> Rezerwacja { get; set; }
         public virtual DbSet<Seria> Seria { get; set; }
         public virtual DbSet<Typ> Typ { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> IleSztukPoISBN(Nullable<long> isbn)
+        {
+            var isbnParameter = isbn.HasValue ?
+                new ObjectParameter("isbn", isbn) :
+                new ObjectParameter("isbn", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleSztukPoISBN", isbnParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> IleSztukPoISSN(Nullable<int> issn)
+        {
+            var issnParameter = issn.HasValue ?
+                new ObjectParameter("issn", issn) :
+                new ObjectParameter("issn", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleSztukPoISSN", issnParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> IleWypozyczonych(Nullable<short> id_dzial)
+        {
+            var id_dzialParameter = id_dzial.HasValue ?
+                new ObjectParameter("id_dzial", id_dzial) :
+                new ObjectParameter("id_dzial", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleWypozyczonych", id_dzialParameter);
+        }
+    
+        public virtual ObjectResult<Jaki_autor_najczesciej_Result> Jaki_autor_najczesciej(Nullable<System.DateTime> data_poczatek, Nullable<System.DateTime> data_koniec)
+        {
+            var data_poczatekParameter = data_poczatek.HasValue ?
+                new ObjectParameter("data_poczatek", data_poczatek) :
+                new ObjectParameter("data_poczatek", typeof(System.DateTime));
+    
+            var data_koniecParameter = data_koniec.HasValue ?
+                new ObjectParameter("data_koniec", data_koniec) :
+                new ObjectParameter("data_koniec", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Jaki_autor_najczesciej_Result>("Jaki_autor_najczesciej", data_poczatekParameter, data_koniecParameter);
+        }
+    
+        public virtual ObjectResult<JakieOsobyPrzetrzymywalyNajwiecej_Result> JakieOsobyPrzetrzymywalyNajwiecej(Nullable<System.DateTime> od, Nullable<System.DateTime> @do)
+        {
+            var odParameter = od.HasValue ?
+                new ObjectParameter("od", od) :
+                new ObjectParameter("od", typeof(System.DateTime));
+    
+            var doParameter = @do.HasValue ?
+                new ObjectParameter("do", @do) :
+                new ObjectParameter("do", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakieOsobyPrzetrzymywalyNajwiecej_Result>("JakieOsobyPrzetrzymywalyNajwiecej", odParameter, doParameter);
+        }
+    
+        public virtual ObjectResult<JakiePozycjeNajczesciejWypozyczane_Result> JakiePozycjeNajczesciejWypozyczane(Nullable<System.DateTime> od, Nullable<System.DateTime> @do)
+        {
+            var odParameter = od.HasValue ?
+                new ObjectParameter("od", od) :
+                new ObjectParameter("od", typeof(System.DateTime));
+    
+            var doParameter = @do.HasValue ?
+                new ObjectParameter("do", @do) :
+                new ObjectParameter("do", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakiePozycjeNajczesciejWypozyczane_Result>("JakiePozycjeNajczesciejWypozyczane", odParameter, doParameter);
+        }
+    
+        public virtual ObjectResult<JakieRezerwacjeGotoweDoOdebrania_Result> JakieRezerwacjeGotoweDoOdebrania()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakieRezerwacjeGotoweDoOdebrania_Result>("JakieRezerwacjeGotoweDoOdebrania");
+        }
+    
+        public virtual ObjectResult<Nullable<System.DateTime>> Kiedy_dostepna(Nullable<short> id_pozycja)
+        {
+            var id_pozycjaParameter = id_pozycja.HasValue ?
+                new ObjectParameter("id_pozycja", id_pozycja) :
+                new ObjectParameter("id_pozycja", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("Kiedy_dostepna", id_pozycjaParameter);
+        }
     }
 }
