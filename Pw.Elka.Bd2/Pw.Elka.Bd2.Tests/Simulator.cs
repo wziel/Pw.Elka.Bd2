@@ -40,13 +40,13 @@ namespace Pw.Elka.Bd2.Tests
                 {
                     Console.Write("\rSimulation, current date:{0}%               ", _currDate.ToString());
                     UpdateKaraColumn(ctx);
-                    RemoveUnusedReservations(ctx);
-                    SaveChanges(ctx);
                     ReceiveReservations(ctx);
+                    SaveChanges(ctx);
+                    HandleNewOrders(ctx);
                     SaveChanges(ctx);
                     HandleReturns(ctx);
                     SaveChanges(ctx);
-                    HandleNewOrders(ctx);
+                    RemoveUnusedReservations(ctx);
                     SaveChanges(ctx);
 
                 }
@@ -70,9 +70,13 @@ namespace Pw.Elka.Bd2.Tests
             var reservationsWaitingCount = ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue
                 && r.Klient.liczba_wypozyczonych.HasValue && r.Klient.liczba_wypozyczonych < 3).Count();
             var toReceiveCount = reservationsWaitingCount == 1 ? 1 : reservationsWaitingCount / 2;
-            var toReceive = Helpers.GetRandomCollectionFromWithExactCount(ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue).Include(r => r.Klient), toReceiveCount);
+            var toReceive = Helpers.GetRandomCollectionFromWithExactCount(ctx.Rezerwacja.Include(r => r.Klient).Include(r => r.Pozycja).Where(r => r.gotowe_od.HasValue), toReceiveCount);
             toReceive.ForEach(r =>
             {
+                if (r.Klient == null)
+                {
+                    return;
+                }
                 if(!r.Klient.liczba_wypozyczonych.HasValue)
                 {
                     r.Klient.liczba_wypozyczonych = 0;
@@ -89,6 +93,7 @@ namespace Pw.Elka.Bd2.Tests
         {
             var endReservationDate = _currDate.AddDays(-3);
             var toRemove = ctx.Rezerwacja.Where(r => r.gotowe_od.HasValue && r.gotowe_od.Value < endReservationDate).ToList();
+            toRemove.Select(r => r.Pozycja).ToList().ForEach(p => CheckForReservationFor(p, ctx));
             ctx.Rezerwacja.RemoveRange(toRemove);
         }
 
@@ -182,25 +187,30 @@ namespace Pw.Elka.Bd2.Tests
             var comingReservationDate = _currDate.AddDays(10);
             ctx.Rewers.Where(r => r.data_zwrotu == null && r.data_do < comingReservationDate).Include(r => r.Klient).Include(r => r.Pozycja).ToList().ForEach(r =>
             {
-                if (Helpers.Random.Next(100) < 10)
+                if (Helpers.Random.Next(100) < (15 + r.id_klient % 60))
                 {
                     r.data_zwrotu = _currDate;
-                    var rezerwacja = ctx.Rezerwacja.Where(rez => rez.Pozycja.id_pozycja == r.Pozycja.id_pozycja)
-                        .OrderBy(rez => rez.data_rezerwacji).FirstOrDefault();
-
                     r.Klient.liczba_wypozyczonych--;
                     r.Pozycja.dostepna_od = null;
 
-                    if (rezerwacja != null)
-                    {
-                        rezerwacja.gotowe_od = _currDate;
-                    }
-                    else
-                    {
-                        r.Pozycja.wypozyczona = false;
-                    }
+                    CheckForReservationFor(r.Pozycja, ctx);
                 }
             });
+        }
+
+        private static void CheckForReservationFor(Pozycja pozycja, Entities ctx)
+        {
+            var rezerwacja = ctx.Rezerwacja.Where(rez => rez.id_pozycja == pozycja.id_pozycja && rez.gotowe_od == null)
+                .OrderBy(rez => rez.data_rezerwacji).FirstOrDefault();
+
+            if(rezerwacja != null)
+            {
+                rezerwacja.gotowe_od = _currDate;
+            }
+            else
+            {
+                pozycja.wypozyczona = false;
+            }
         }
     }
 }

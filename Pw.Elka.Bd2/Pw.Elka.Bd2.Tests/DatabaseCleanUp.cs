@@ -25,44 +25,24 @@ namespace Pw.Elka.Bd2.Tests
             }
         }
 
-        private static void ClearManyToManyRelations(Entities ctx)
-        {
-            foreach (var gatunek in ctx.Gatunek)
-            {
-                Console.Write($"\rUsuwanie relacji Pozycja-Gatunek          ");
-                gatunek.Pozycja.Clear();
-            }
-            foreach (var autor in ctx.Autor)
-            {
-                Console.Write($"\rUsuwanie relacji Pozycja-Autor            ");
-                autor.Pozycja.Clear();
-            }
-
-            try
-            {
-                ctx.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public static void Start()
         {
             using (var dbContext = new Entities())
             {
-                ClearManyToManyRelations(dbContext);
+                Console.Write($"\rUsuwanie rewersów                     ");
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[Rewers]");
+                Console.Write($"\rUsuwanie rezerwacji                   ");
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[Rezerwacja]");
+                Console.Write($"\rUsuwanie poufnych danych klientów     ");
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[Klient_Poufne]");
+                Console.Write($"\rUsuwanie relacji Pozycja-Gatunek          ");
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[Pozycja_gatunek]");
+                Console.Write($"\rUsuwanie relacji Pozycja-Autor            ");
+                dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [dbo].[Pozycja_autor]");
                 Console.Write($"\rUsuwanie gatunkow                     ");
                 dbContext.Gatunek.Clear(dbContext, 10000);
                 Console.Write($"\rUsuwanie autorów                      ");
                 dbContext.Autor.Clear(dbContext, 10000);
-                Console.Write($"\rUsuwanie rewersów                     ");
-                dbContext.Rewers.Clear(dbContext, 10000);
-                Console.Write($"\rUsuwanie rezerwacji                   ");
-                dbContext.Rezerwacja.Clear(dbContext, 10000);
-                Console.Write($"\rUsuwanie poufnych danych klientów     ");
-                dbContext.Klient_Poufne.Clear(dbContext, 10000);
                 Console.Write($"\rUsuwanie klientów                     ");
                 dbContext.Klient.Clear(dbContext, 10000);
                 Console.Write($"\rUsuwanie pozycji                      ");
