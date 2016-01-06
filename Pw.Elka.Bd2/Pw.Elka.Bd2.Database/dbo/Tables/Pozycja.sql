@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Pozycja] (
-    [id_pozycja]  INT             NOT NULL IDENTITY,
+    [id_pozycja]  INT             IDENTITY (1, 1) NOT NULL,
     [isbn]        BIGINT          NULL,
-    [nazwa]       VARCHAR (100)    NOT NULL,
+    [nazwa]       VARCHAR (100)   NOT NULL,
     [rok]         SMALLINT        NOT NULL,
     [zdjecie]     VARBINARY (MAX) NULL,
     [dostepna_od] DATE            NULL,
@@ -14,6 +14,20 @@
     CONSTRAINT [FK_Pozycja_Seria] FOREIGN KEY ([id_seria]) REFERENCES [dbo].[Seria] ([id_seria]),
     CONSTRAINT [FK_Pozycja_Typ] FOREIGN KEY ([id_typ]) REFERENCES [dbo].[Typ] ([id_typ])
 );
+
+
+GO
+ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Dzial];
+
+
+GO
+ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Seria];
+
+
+GO
+ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Typ];
+
+
 
 
 

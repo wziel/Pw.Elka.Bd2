@@ -1,9 +1,9 @@
 ﻿-- =============================================
--- Author:		Kiedy_dostepna
--- Create date: 
--- Description:	Kiedy pozycja bedzie dostepna
+-- Author:		mmudel
+-- Create date: 06.01.2016
+-- Description:	Kiedy pozycja bedzie dostepna. Nie korzysta z indexow
 -- =============================================
-CREATE PROCEDURE [dbo].[Kiedy_dostepna] 
+CREATE PROCEDURE KiedyDostepnaBezIndexow 
 	-- Add the parameters for the stored procedure here
 	@id_pozycja int
 AS
@@ -13,5 +13,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT Pozycja.nazwa, Pozycja.dostepna_od from Pozycja where Pozycja.id_pozycja = @id_pozycja 
+	SELECT Pozycja.nazwa, Pozycja.dostepna_od 
+	FROM Pozycja WITH (INDEX(0))
+	WHERE Pozycja.id_pozycja = @id_pozycja 
 END

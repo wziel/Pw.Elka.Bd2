@@ -1,12 +1,11 @@
 ﻿-- =============================================
--- Author:		Name
+-- Author:		Kiedy_dostepna
 -- Create date: 
--- Description:	Pozycje jakiego autora były najczęściej wypożyczane od... do...
+-- Description:	Kiedy pozycja bedzie dostepna
 -- =============================================
-CREATE PROCEDURE Jaki_autor_najczesciej 
+CREATE PROCEDURE [dbo].[KiedyDostepna] 
 	-- Add the parameters for the stored procedure here
-	@data_poczatek date , 
-	@data_koniec date
+	@id_pozycja int
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -14,7 +13,5 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT id_autor, nazwiska, imiona  from autor
-
-
+	SELECT Pozycja.nazwa, Pozycja.dostepna_od from Pozycja where Pozycja.id_pozycja = @id_pozycja 
 END

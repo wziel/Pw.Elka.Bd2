@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Rewers] (
-    [id_rewers]   INT  NOT NULL IDENTITY,
+    [id_rewers]   INT  IDENTITY (1, 1) NOT NULL,
     [data_od]     DATE NOT NULL,
     [data_do]     DATE NOT NULL,
     [data_zwrotu] DATE NULL,
@@ -9,6 +9,12 @@
     CONSTRAINT [FK_Rewers_Klient] FOREIGN KEY ([id_klient]) REFERENCES [dbo].[Klient] ([id_klient]),
     CONSTRAINT [FK_Rewers_Pozycja] FOREIGN KEY ([id_pozycja]) REFERENCES [dbo].[Pozycja] ([id_pozycja])
 );
+
+
+GO
+ALTER TABLE [dbo].[Rewers] NOCHECK CONSTRAINT [FK_Rewers_Pozycja];
+
+
 
 
 

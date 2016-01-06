@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Rezerwacja] (
-    [id_rezerwacja]   INT  NOT NULL IDENTITY,
+    [id_rezerwacja]   INT  IDENTITY (1, 1) NOT NULL,
     [data_rezerwacji] DATE NOT NULL,
     [gotowe_od]       DATE NULL,
     [id_pozycja]      INT  NOT NULL,
@@ -8,6 +8,12 @@
     CONSTRAINT [FK_Rezerwacja_Klient] FOREIGN KEY ([id_klient]) REFERENCES [dbo].[Klient] ([id_klient]),
     CONSTRAINT [FK_Rezerwacja_Pozycja] FOREIGN KEY ([id_pozycja]) REFERENCES [dbo].[Pozycja] ([id_pozycja])
 );
+
+
+GO
+ALTER TABLE [dbo].[Rezerwacja] NOCHECK CONSTRAINT [FK_Rezerwacja_Pozycja];
+
+
 
 
 
