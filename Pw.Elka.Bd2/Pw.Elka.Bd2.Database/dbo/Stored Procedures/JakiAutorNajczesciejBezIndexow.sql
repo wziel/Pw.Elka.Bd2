@@ -1,6 +1,6 @@
 ﻿-- =============================================
--- Author:		mmudel
--- Create date: 06.01.2016
+-- Author:		jraczyns
+-- Create date: 07.01.2016
 -- Description:	Pozycje jakiego autora były najczęściej wypożyczane od... do... Nie korzysta z indexow
 -- =============================================
 CREATE PROCEDURE [dbo].[JakiAutorNajczesciejBezIndexow]
@@ -14,8 +14,16 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT id_autor, nazwiska, imiona
-	FROM autor WITH (INDEX(0))
 
+	SET ROWCOUNT 10
+	SELECT COUNT(*) as liczba_wypozyczen, Autor.id_autor, Autor.imiona, Autor.nazwiska
+	from Pozycja WITH (INDEX(0))
+	LEFT JOIN Pozycja_autor WITH (INDEX(0)) ON Pozycja_autor.id_pozycja = Pozycja.id_pozycja 
+	LEFT JOIN Autor WITH (INDEX(0)) ON  Pozycja_autor.id_autor = Autor.id_autor
+	LEFT JOIN Rewers WITH (INDEX(0)) ON Rewers.id_pozycja=Pozycja.id_pozycja
+	WHERE Rewers.data_od > @data_poczatek
+	AND Rewers.data_do < @data_koniec
+	GROUP BY Autor.id_autor, Autor.imiona, Autor.nazwiska
+	ORDER BY liczba_wypozyczen DESC
 
 END
