@@ -79,5 +79,36 @@ namespace Pw.Elka.Bd2.Tests
             }
             return list;
         }
+
+        private static DateTime GetRandomDate()
+        {
+            var start = new DateTime(2014, 1, 1);
+            int range = (DateTime.Today - start).Days;
+            return start.AddDays(Random.Next(range));
+        }
+
+        public class DateTimeRange
+        {
+            public DateTime StartDate { get; private set; }
+            public DateTime EndDate { get; private set; }
+
+            private DateTimeRange() { }
+
+            public static DateTimeRange GetRandomDateTimeRange()
+            {
+                var dtRange = new DateTimeRange();
+                dtRange.StartDate = GetRandomDate();
+                dtRange.EndDate = GetRandomDate();
+
+                if (dtRange.StartDate > dtRange.EndDate)
+                {
+                    var temp = dtRange.StartDate;
+                    dtRange.StartDate = dtRange.EndDate;
+                    dtRange.EndDate = dtRange.StartDate;
+                }
+
+                return dtRange;
+            }
+        }
     }
 }
