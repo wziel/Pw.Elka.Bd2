@@ -261,13 +261,26 @@
         <Function Name="IleSztukPoISBN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="isbn" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="IleSztukPoISBNBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="isbn" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="IleSztukPoISSN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="issn" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IleSztukPoISSNBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="issn" Type="int" Mode="In" />
         </Function>
         <Function Name="IleWypozyczonych" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_dzial" Type="smallint" Mode="In" />
         </Function>
-        <Function Name="Jaki_autor_najczesciej" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="IleWypozyczonychBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_dzial" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="JakiAutorNajczesciej" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="data_poczatek" Type="date" Mode="In" />
+          <Parameter Name="data_koniec" Type="date" Mode="In" />
+        </Function>
+        <Function Name="JakiAutorNajczesciejBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="data_poczatek" Type="date" Mode="In" />
           <Parameter Name="data_koniec" Type="date" Mode="In" />
         </Function>
@@ -275,13 +288,25 @@
           <Parameter Name="od" Type="date" Mode="In" />
           <Parameter Name="do" Type="date" Mode="In" />
         </Function>
+        <Function Name="JakieOsobyPrzetrzymywalyNajwiecejBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="od" Type="date" Mode="In" />
+          <Parameter Name="do" Type="date" Mode="In" />
+        </Function>
         <Function Name="JakiePozycjeNajczesciejWypozyczane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="od" Type="date" Mode="In" />
           <Parameter Name="do" Type="date" Mode="In" />
         </Function>
+        <Function Name="JakiePozycjeNajczesciejWypozyczaneBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="od" Type="date" Mode="In" />
+          <Parameter Name="do" Type="date" Mode="In" />
+        </Function>
         <Function Name="JakieRezerwacjeGotoweDoOdebrania" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="Kiedy_dostepna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_pozycja" Type="smallint" Mode="In" />
+        <Function Name="JakieRezerwacjeGotoweDoOdebraniaBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="KiedyDostepna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pozycja" Type="int" Mode="In" />
+        </Function>
+        <Function Name="KiedyDostepnaBezIndexow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_pozycja" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="PwElkaBd2TestsModelStoreContainer">
           <EntitySet Name="Autor" EntityType="Self.Autor" Schema="dbo" store:Type="Tables" />
@@ -618,13 +643,13 @@
             <End Role="Pozycja" EntitySet="Pozycja" />
           </AssociationSet>
           <FunctionImport Name="IleSztukPoISBN" ReturnType="Collection(Int32)">
-            <Parameter Name="isbn" Mode="In" Type="Int64" />
+          <Parameter Name="isbn" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="IleSztukPoISSN" ReturnType="Collection(Int32)">
-            <Parameter Name="issn" Mode="In" Type="Int32" />
+          <Parameter Name="issn" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="IleWypozyczonych" ReturnType="Collection(Int32)">
-            <Parameter Name="id_dzial" Mode="In" Type="Int16" />
+          <Parameter Name="id_dzial" Mode="In" Type="Int16" />
           </FunctionImport>
           <FunctionImport Name="Jaki_autor_najczesciej" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.Jaki_autor_najczesciej_Result)">
             <Parameter Name="data_poczatek" Mode="In" Type="DateTime" />
@@ -641,6 +666,38 @@
           <FunctionImport Name="JakieRezerwacjeGotoweDoOdebrania" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakieRezerwacjeGotoweDoOdebrania_Result)" />
           <FunctionImport Name="Kiedy_dostepna" ReturnType="Collection(DateTime)">
             <Parameter Name="id_pozycja" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="IleSztukPoISBNBezIndexow" ReturnType="Collection(Int32)">
+            <Parameter Name="isbn" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="IleSztukPoISSNBezIndexow" ReturnType="Collection(Int32)">
+            <Parameter Name="issn" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IleWypozyczonychBezIndexow" ReturnType="Collection(Int32)">
+            <Parameter Name="id_dzial" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="JakiAutorNajczesciej" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakiAutorNajczesciej_Result)">
+            <Parameter Name="data_poczatek" Mode="In" Type="DateTime" />
+            <Parameter Name="data_koniec" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="JakiAutorNajczesciejBezIndexow" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakiAutorNajczesciejBezIndexow_Result)">
+            <Parameter Name="data_poczatek" Mode="In" Type="DateTime" />
+            <Parameter Name="data_koniec" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="JakieOsobyPrzetrzymywalyNajwiecejBezIndexow" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakieOsobyPrzetrzymywalyNajwiecejBezIndexow_Result)">
+            <Parameter Name="od" Mode="In" Type="DateTime" />
+            <Parameter Name="do" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="JakiePozycjeNajczesciejWypozyczaneBezIndexow" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakiePozycjeNajczesciejWypozyczaneBezIndexow_Result)">
+            <Parameter Name="od" Mode="In" Type="DateTime" />
+            <Parameter Name="do" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="JakieRezerwacjeGotoweDoOdebraniaBezIndexow" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.JakieRezerwacjeGotoweDoOdebraniaBezIndexow_Result)" />
+          <FunctionImport Name="KiedyDostepna" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.KiedyDostepna_Result)">
+            <Parameter Name="id_pozycja" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="KiedyDostepnaBezIndexow" ReturnType="Collection(Pw.Elka.Bd2.Tests.Model.KiedyDostepnaBezIndexow_Result)">
+            <Parameter Name="id_pozycja" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Jaki_autor_najczesciej_Result">
@@ -663,6 +720,42 @@
           <Property Type="Int32" Name="id_rezerwacja" Nullable="false" />
           <Property Type="Int32" Name="id_pozycja" Nullable="false" />
           <Property Type="String" Name="nazwa" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="JakiAutorNajczesciej_Result">
+          <Property Type="Int32" Name="liczba_wypozyczen" Nullable="true" />
+          <Property Type="Int32" Name="id_autor" Nullable="true" />
+          <Property Type="String" Name="imiona" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="nazwiska" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="JakiAutorNajczesciejBezIndexow_Result">
+          <Property Type="Int32" Name="liczba_wypozyczen" Nullable="true" />
+          <Property Type="Int32" Name="id_autor" Nullable="true" />
+          <Property Type="String" Name="imiona" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="nazwiska" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="JakieOsobyPrzetrzymywalyNajwiecejBezIndexow_Result">
+          <Property Type="Int32" Name="id_klient" Nullable="false" />
+          <Property Type="String" Name="imiona" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nazwiska" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Suma_przetrzymanych_dni" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="JakiePozycjeNajczesciejWypozyczaneBezIndexow_Result">
+          <Property Type="Int32" Name="id_pozycja" Nullable="false" />
+          <Property Type="String" Name="nazwa" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="liczba_wypozyczen" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="JakieRezerwacjeGotoweDoOdebraniaBezIndexow_Result">
+          <Property Type="Int32" Name="id_rezerwacja" Nullable="false" />
+          <Property Type="Int32" Name="id_pozycja" Nullable="false" />
+          <Property Type="String" Name="nazwa" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="KiedyDostepna_Result">
+          <Property Type="String" Name="nazwa" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dostepna_od" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="KiedyDostepnaBezIndexow_Result">
+          <Property Type="String" Name="nazwa" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="dostepna_od" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -792,15 +885,6 @@
           <FunctionImportMapping FunctionImportName="IleSztukPoISBN" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleSztukPoISBN" />
           <FunctionImportMapping FunctionImportName="IleSztukPoISSN" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleSztukPoISSN" />
           <FunctionImportMapping FunctionImportName="IleWypozyczonych" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleWypozyczonych" />
-          <FunctionImportMapping FunctionImportName="Jaki_autor_najczesciej" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.Jaki_autor_najczesciej">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.Jaki_autor_najczesciej_Result">
-                <ScalarProperty Name="id_autor" ColumnName="id_autor" />
-                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
-                <ScalarProperty Name="imiona" ColumnName="imiona" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="JakieOsobyPrzetrzymywalyNajwiecej" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakieOsobyPrzetrzymywalyNajwiecej">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakieOsobyPrzetrzymywalyNajwiecej_Result">
@@ -829,7 +913,73 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Kiedy_dostepna" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.Kiedy_dostepna" />
+          <FunctionImportMapping FunctionImportName="IleSztukPoISBNBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleSztukPoISBNBezIndexow" />
+          <FunctionImportMapping FunctionImportName="IleSztukPoISSNBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleSztukPoISSNBezIndexow" />
+          <FunctionImportMapping FunctionImportName="IleWypozyczonychBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.IleWypozyczonychBezIndexow" />
+          <FunctionImportMapping FunctionImportName="JakiAutorNajczesciej" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakiAutorNajczesciej">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakiAutorNajczesciej_Result">
+                <ScalarProperty Name="liczba_wypozyczen" ColumnName="liczba_wypozyczen" />
+                <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+                <ScalarProperty Name="imiona" ColumnName="imiona" />
+                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JakiAutorNajczesciejBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakiAutorNajczesciejBezIndexow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakiAutorNajczesciejBezIndexow_Result">
+                <ScalarProperty Name="liczba_wypozyczen" ColumnName="liczba_wypozyczen" />
+                <ScalarProperty Name="id_autor" ColumnName="id_autor" />
+                <ScalarProperty Name="imiona" ColumnName="imiona" />
+                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JakieOsobyPrzetrzymywalyNajwiecejBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakieOsobyPrzetrzymywalyNajwiecejBezIndexow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakieOsobyPrzetrzymywalyNajwiecejBezIndexow_Result">
+                <ScalarProperty Name="id_klient" ColumnName="id_klient" />
+                <ScalarProperty Name="imiona" ColumnName="imiona" />
+                <ScalarProperty Name="nazwiska" ColumnName="nazwiska" />
+                <ScalarProperty Name="Suma_przetrzymanych_dni" ColumnName="Suma_przetrzymanych_dni" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JakiePozycjeNajczesciejWypozyczaneBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakiePozycjeNajczesciejWypozyczaneBezIndexow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakiePozycjeNajczesciejWypozyczaneBezIndexow_Result">
+                <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="liczba_wypozyczen" ColumnName="liczba_wypozyczen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="JakieRezerwacjeGotoweDoOdebraniaBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.JakieRezerwacjeGotoweDoOdebraniaBezIndexow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.JakieRezerwacjeGotoweDoOdebraniaBezIndexow_Result">
+                <ScalarProperty Name="id_rezerwacja" ColumnName="id_rezerwacja" />
+                <ScalarProperty Name="id_pozycja" ColumnName="id_pozycja" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KiedyDostepna" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.KiedyDostepna">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.KiedyDostepna_Result">
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="dostepna_od" ColumnName="dostepna_od" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="KiedyDostepnaBezIndexow" FunctionName="Pw.Elka.Bd2.Tests.Model.Store.KiedyDostepnaBezIndexow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Pw.Elka.Bd2.Tests.Model.KiedyDostepnaBezIndexow_Result">
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="dostepna_od" ColumnName="dostepna_od" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

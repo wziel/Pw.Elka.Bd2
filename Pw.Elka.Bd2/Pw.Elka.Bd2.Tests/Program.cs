@@ -43,6 +43,13 @@ namespace Pw.Elka.Bd2.Tests
                 DataGenerator.Generate(_seriasCount, _autorsCount, _pozycjasCount, _klientsCount, isProduction);
                 Simulator.Simulate();
             }
+            if(args.Contains("tests"))
+            {
+                TimeTests.RunTests();
+            }
+
+            Console.WriteLine("Naciśnij dowolny klawisz aby zakończyć...");
+            Console.Read();
         }
     }
 }

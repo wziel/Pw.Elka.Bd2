@@ -117,5 +117,107 @@ namespace Pw.Elka.Bd2.Tests.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("Kiedy_dostepna", id_pozycjaParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> IleSztukPoISBNBezIndexow(Nullable<long> isbn)
+        {
+            var isbnParameter = isbn.HasValue ?
+                new ObjectParameter("isbn", isbn) :
+                new ObjectParameter("isbn", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleSztukPoISBNBezIndexow", isbnParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> IleSztukPoISSNBezIndexow(Nullable<int> issn)
+        {
+            var issnParameter = issn.HasValue ?
+                new ObjectParameter("issn", issn) :
+                new ObjectParameter("issn", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleSztukPoISSNBezIndexow", issnParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> IleWypozyczonychBezIndexow(Nullable<short> id_dzial)
+        {
+            var id_dzialParameter = id_dzial.HasValue ?
+                new ObjectParameter("id_dzial", id_dzial) :
+                new ObjectParameter("id_dzial", typeof(short));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("IleWypozyczonychBezIndexow", id_dzialParameter);
+        }
+    
+        public virtual ObjectResult<JakiAutorNajczesciej_Result> JakiAutorNajczesciej(Nullable<System.DateTime> data_poczatek, Nullable<System.DateTime> data_koniec)
+        {
+            var data_poczatekParameter = data_poczatek.HasValue ?
+                new ObjectParameter("data_poczatek", data_poczatek) :
+                new ObjectParameter("data_poczatek", typeof(System.DateTime));
+    
+            var data_koniecParameter = data_koniec.HasValue ?
+                new ObjectParameter("data_koniec", data_koniec) :
+                new ObjectParameter("data_koniec", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakiAutorNajczesciej_Result>("JakiAutorNajczesciej", data_poczatekParameter, data_koniecParameter);
+        }
+    
+        public virtual ObjectResult<JakiAutorNajczesciejBezIndexow_Result> JakiAutorNajczesciejBezIndexow(Nullable<System.DateTime> data_poczatek, Nullable<System.DateTime> data_koniec)
+        {
+            var data_poczatekParameter = data_poczatek.HasValue ?
+                new ObjectParameter("data_poczatek", data_poczatek) :
+                new ObjectParameter("data_poczatek", typeof(System.DateTime));
+    
+            var data_koniecParameter = data_koniec.HasValue ?
+                new ObjectParameter("data_koniec", data_koniec) :
+                new ObjectParameter("data_koniec", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakiAutorNajczesciejBezIndexow_Result>("JakiAutorNajczesciejBezIndexow", data_poczatekParameter, data_koniecParameter);
+        }
+    
+        public virtual ObjectResult<JakieOsobyPrzetrzymywalyNajwiecejBezIndexow_Result> JakieOsobyPrzetrzymywalyNajwiecejBezIndexow(Nullable<System.DateTime> od, Nullable<System.DateTime> @do)
+        {
+            var odParameter = od.HasValue ?
+                new ObjectParameter("od", od) :
+                new ObjectParameter("od", typeof(System.DateTime));
+    
+            var doParameter = @do.HasValue ?
+                new ObjectParameter("do", @do) :
+                new ObjectParameter("do", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakieOsobyPrzetrzymywalyNajwiecejBezIndexow_Result>("JakieOsobyPrzetrzymywalyNajwiecejBezIndexow", odParameter, doParameter);
+        }
+    
+        public virtual ObjectResult<JakiePozycjeNajczesciejWypozyczaneBezIndexow_Result> JakiePozycjeNajczesciejWypozyczaneBezIndexow(Nullable<System.DateTime> od, Nullable<System.DateTime> @do)
+        {
+            var odParameter = od.HasValue ?
+                new ObjectParameter("od", od) :
+                new ObjectParameter("od", typeof(System.DateTime));
+    
+            var doParameter = @do.HasValue ?
+                new ObjectParameter("do", @do) :
+                new ObjectParameter("do", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakiePozycjeNajczesciejWypozyczaneBezIndexow_Result>("JakiePozycjeNajczesciejWypozyczaneBezIndexow", odParameter, doParameter);
+        }
+    
+        public virtual ObjectResult<JakieRezerwacjeGotoweDoOdebraniaBezIndexow_Result> JakieRezerwacjeGotoweDoOdebraniaBezIndexow()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<JakieRezerwacjeGotoweDoOdebraniaBezIndexow_Result>("JakieRezerwacjeGotoweDoOdebraniaBezIndexow");
+        }
+    
+        public virtual ObjectResult<KiedyDostepna_Result> KiedyDostepna(Nullable<int> id_pozycja)
+        {
+            var id_pozycjaParameter = id_pozycja.HasValue ?
+                new ObjectParameter("id_pozycja", id_pozycja) :
+                new ObjectParameter("id_pozycja", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<KiedyDostepna_Result>("KiedyDostepna", id_pozycjaParameter);
+        }
+    
+        public virtual ObjectResult<KiedyDostepnaBezIndexow_Result> KiedyDostepnaBezIndexow(Nullable<int> id_pozycja)
+        {
+            var id_pozycjaParameter = id_pozycja.HasValue ?
+                new ObjectParameter("id_pozycja", id_pozycja) :
+                new ObjectParameter("id_pozycja", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<KiedyDostepnaBezIndexow_Result>("KiedyDostepnaBezIndexow", id_pozycjaParameter);
+        }
     }
 }
