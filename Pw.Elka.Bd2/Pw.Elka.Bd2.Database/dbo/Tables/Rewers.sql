@@ -11,10 +11,6 @@
 );
 
 
-GO
-ALTER TABLE [dbo].[Rewers] NOCHECK CONSTRAINT [FK_Rewers_Pozycja];
-
-
 
 
 

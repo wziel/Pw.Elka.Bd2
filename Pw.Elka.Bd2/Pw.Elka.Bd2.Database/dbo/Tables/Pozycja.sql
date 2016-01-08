@@ -16,18 +16,6 @@
 );
 
 
-GO
-ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Dzial];
-
-
-GO
-ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Seria];
-
-
-GO
-ALTER TABLE [dbo].[Pozycja] NOCHECK CONSTRAINT [FK_Pozycja_Typ];
-
-
 
 
 

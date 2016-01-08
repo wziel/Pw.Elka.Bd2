@@ -10,10 +10,6 @@
 );
 
 
-GO
-ALTER TABLE [dbo].[Rezerwacja] NOCHECK CONSTRAINT [FK_Rezerwacja_Pozycja];
-
-
 
 
 

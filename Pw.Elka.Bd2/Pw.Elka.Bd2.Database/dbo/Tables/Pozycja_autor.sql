@@ -7,10 +7,6 @@
 );
 
 
-GO
-ALTER TABLE [dbo].[Pozycja_autor] NOCHECK CONSTRAINT [FK_Pozycja_autor_ToTable];
-
-
 
 
 

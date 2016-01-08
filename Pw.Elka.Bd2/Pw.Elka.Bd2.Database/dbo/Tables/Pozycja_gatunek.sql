@@ -7,10 +7,6 @@
 );
 
 
-GO
-ALTER TABLE [dbo].[Pozycja_gatunek] NOCHECK CONSTRAINT [FK_Pozycja_gatunek_Pozycja];
-
-
 
 
 
